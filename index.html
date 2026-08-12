@@ -1,0 +1,475 @@
+<title>Ibrokhim Movlonov — Senior Mobile Engineer</title>
+<style>
+  /* ============================================================
+     Design tokens — light is the base; dark redefines tokens only.
+     Palette: Apple-white ground, near-black ink, Swift-orange accent.
+     Type: SF via -apple-system (subject-native), SF Mono for labels.
+     ============================================================ */
+  :root {
+    --ground: #fafaf8;
+    --surface: #ffffff;
+    --ink: #1d1d1f;
+    --ink-2: #55565b;
+    --ink-3: #86868b;
+    --hair: #e6e4df;
+    --accent: #e14e1d;         /* swift orange, darkened for AA on white */
+    --accent-soft: #fbeee8;
+    --shadow: 0 1px 2px rgba(29,29,31,.05), 0 8px 28px rgba(29,29,31,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #151517;
+      --surface: #1e1e21;
+      --ink: #f5f5f7;
+      --ink-2: #b6b6bc;
+      --ink-3: #86868b;
+      --hair: #2d2d31;
+      --accent: #ff7043;
+      --accent-soft: #2c2019;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #151517;
+    --surface: #1e1e21;
+    --ink: #f5f5f7;
+    --ink-2: #b6b6bc;
+    --ink-3: #86868b;
+    --hair: #2d2d31;
+    --accent: #ff7043;
+    --accent-soft: #2c2019;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover, a:focus-visible { text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 96px 0 64px; }
+  .hero .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .hero h1 {
+    margin-top: 18px;
+    font-size: clamp(34px, 6vw, 54px);
+    line-height: 1.08;
+    letter-spacing: -0.022em;
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  .hero .sub {
+    margin-top: 22px;
+    font-size: 19px;
+    color: var(--ink-2);
+    max-width: 58ch;
+    text-wrap: pretty;
+  }
+  .hero .links { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-block;
+    padding: 9px 18px;
+    border-radius: 980px;
+    border: 1px solid var(--hair);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 500;
+    box-shadow: var(--shadow);
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn:hover { text-decoration: none; filter: brightness(1.05); }
+  .todo {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px dashed var(--accent);
+    border-radius: 4px;
+    padding: 1px 6px;
+    vertical-align: middle;
+  }
+
+  /* ---------- metrics strip ---------- */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--hair);
+    border: 1px solid var(--hair);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 72px;
+  }
+  .metric { background: var(--surface); padding: 18px 20px; }
+  .metric .n {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .metric .n em { font-style: normal; color: var(--accent); }
+  .metric .l { font-size: 13px; color: var(--ink-3); margin-top: 2px; line-height: 1.35; }
+
+  /* ---------- sections ---------- */
+  section { padding-bottom: 72px; }
+  .sec-head {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border-bottom: 1px solid var(--hair);
+    padding-bottom: 10px;
+    margin-bottom: 34px;
+  }
+  .sec-head b { color: var(--accent); font-weight: 400; }
+
+  /* ---------- case studies ---------- */
+  .case { margin-bottom: 52px; }
+  .case:last-child { margin-bottom: 0; }
+  .case .tag {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .case h3 {
+    font-size: 26px;
+    letter-spacing: -0.018em;
+    line-height: 1.2;
+    margin-top: 8px;
+    text-wrap: balance;
+  }
+  .case .where { color: var(--ink-3); font-size: 14px; margin-top: 4px; }
+  .case dl { margin-top: 18px; display: grid; gap: 14px; }
+  .case dt {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 3px;
+  }
+  .case dd { color: var(--ink-2); }
+  .case dd b { color: var(--ink); font-weight: 600; }
+  .case .stackline { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ink-2);
+    background: var(--surface);
+    border: 1px solid var(--hair);
+    border-radius: 980px;
+    padding: 3px 11px;
+  }
+
+  /* ---------- apps grid ---------- */
+  .apps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .app {
+    background: var(--surface);
+    border: 1px solid var(--hair);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .app h3 { font-size: 17px; letter-spacing: -0.01em; }
+  .app .kind { font-size: 12.5px; color: var(--accent); font-weight: 600; }
+  .app p { font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+  .app .link { font-size: 13.5px; margin-top: auto; padding-top: 8px; }
+
+  /* ---------- timeline ---------- */
+  .tl { border-left: 2px solid var(--hair); padding-left: 24px; display: grid; gap: 20px; }
+  .tl .row { position: relative; }
+  .tl .row::before {
+    content: "";
+    position: absolute;
+    left: -29px; top: 7px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--ink-3);
+  }
+  .tl .row.now::before { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .tl .when { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; color: var(--ink-3); }
+  .tl .what { font-weight: 600; }
+  .tl .what span { font-weight: 400; color: var(--ink-2); }
+
+  /* ---------- skills ---------- */
+  .skillgroups { display: grid; gap: 20px; }
+  .skillgroups h3 { font-size: 14px; color: var(--ink-3); font-weight: 600; margin-bottom: 8px; }
+  .skillgroups .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--hair); padding: 48px 0 80px; }
+  footer h2 { font-size: 28px; letter-spacing: -0.02em; margin-bottom: 10px; }
+  footer p { color: var(--ink-2); max-width: 52ch; }
+  footer .links { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+  footer .fine { margin-top: 40px; font-size: 12.5px; color: var(--ink-3); }
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Ibrokhim Movlonov · Senior Mobile Engineer</div>
+    <h1>I build mobile apps that keep working when the network doesn't.</h1>
+    <p class="sub">
+      7+ years across Swift, UIKit/SwiftUI, and data-layer architecture — from training on-device LLMs at Apple to owning
+      the offline-first sync engine behind 150+ white-label event apps. Cross-platform with React Native and Flutter,
+      and founding engineer of an AI health app.
+    </p>
+    <div class="hero links">
+      <a class="btn primary" href="mailto:ibrohim.interview@gmail.com">Get in touch</a>
+      <a class="btn" href="https://linkedin.com/in/ibrokhim-movlonov">LinkedIn</a>
+      <a class="btn" href="https://github.com/ibrohimm">GitHub</a>
+      <a class="btn" href="#">Download CV <span class="todo">add link</span></a>
+    </div>
+  </header>
+
+  <div class="metrics">
+    <div class="metric"><div class="n">7<em>+</em></div><div class="l">years of iOS engineering</div></div>
+    <div class="metric"><div class="n">500K<em>+</em></div><div class="l">downloads in 5 months on an app launch I led</div></div>
+    <div class="metric"><div class="n">150<em>+</em></div><div class="l">white-label apps served by architecture I own</div></div>
+    <div class="metric"><div class="n">100<em>+</em></div><div class="l">engineer Apple AI program I contributed to</div></div>
+  </div>
+
+  <section id="work">
+    <div class="sec-head"><b>01</b> — Selected work</div>
+
+    <article class="case">
+      <div class="tag">Offline-first architecture</div>
+      <h3>A sync engine for places with 40,000 people and no signal</h3>
+      <div class="where">ExpoPlatform · 2025 – present</div>
+      <dl>
+        <dt>Problem</dt>
+        <dd>Exhibition halls are connectivity dead zones, yet attendees rely on the event app for schedules, exhibitor
+          directories, meetings, and lead capture — live data measured in tens of thousands of records per event.</dd>
+        <dt>Approach</dt>
+        <dd>Own the data layer end-to-end: a <b>delta-sync engine</b> against the platform API, <b>Core Data persistence</b>,
+          and <b>prepopulated per-event databases</b> generated through the app's own write pipeline — so every normalization
+          rule propagates identically to first-launch data and live sync. Real-time updates ride a hardened WebSocket channel.</dd>
+        <dt>Impact</dt>
+        <dd>Full event content available with zero connectivity across <b>150+ branded apps</b> built from one codebase;
+          write-side consistency eliminated a whole class of data-mismatch bugs.</dd>
+      </dl>
+      <div class="stackline">
+        <span class="chip">Swift</span><span class="chip">Core Data</span><span class="chip">SQLite</span>
+        <span class="chip">WebSockets</span><span class="chip">Swift Concurrency</span>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="tag">Performance</div>
+      <h3>Making a 10,000-exhibitor directory feel instant</h3>
+      <div class="where">ExpoPlatform · 2025 – present</div>
+      <dl>
+        <dt>Problem</dt>
+        <dd>On the largest events, exhibitor lists and profiles — the app's most-visited screens — loaded slowly enough
+          that users noticed, with the cost hidden inside broad Core Data fetches and repeated filtering passes.</dd>
+        <dt>Approach</dt>
+        <dd>Re-architected the data access path: <b>scoped fetches</b> that read only what the screen renders,
+          <b>lazy relationship loading</b>, <b>parallelized reads with structured concurrency</b> (async let), and
+          collapsing multi-pass filtering into a single pass. Locale-aware search and sorting (including Cyrillic)
+          moved down into the database layer.</dd>
+        <dt>Impact</dt>
+        <dd>Dramatically faster list and profile loads on events with tens of thousands of records
+          <span class="todo">add real before/after numbers</span>.</dd>
+      </dl>
+      <div class="stackline">
+        <span class="chip">Core Data</span><span class="chip">async/await</span><span class="chip">Instruments</span>
+        <span class="chip">Performance profiling</span>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="tag">Cross-platform migration</div>
+      <h3>Leading the data layer of a React Native migration</h3>
+      <div class="where">ExpoPlatform · 2026 – present</div>
+      <dl>
+        <dt>Problem</dt>
+        <dd>Migrating a mature native platform to React Native (Expo) without losing its hardest-won asset: an
+          offline-first data layer that feature teams could build on from day one.</dd>
+        <dt>Approach</dt>
+        <dd>Own sync and persistence for the migration — designed the <b>expo-sqlite database schema</b> and the
+          <b>repository contracts</b> that feature teams consume, translating years of native sync semantics
+          (delta updates, conflict handling, normalization) into the new stack.</dd>
+        <dt>Impact</dt>
+        <dd>Feature teams build against a stable data contract while the platform migrates underneath them —
+          parity with the native engine by design, not by rediscovery.</dd>
+      </dl>
+      <div class="stackline">
+        <span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">expo-sqlite</span>
+        <span class="chip">TypeScript</span><span class="chip">API design</span>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="tag">Founding engineer</div>
+      <h3>From empty repo to the App Store, alone</h3>
+      <div class="where">ONU — AI Health &amp; Prevention · founding engineer · 2026 – present · <a href="https://apps.apple.com/sa/app/onu-ai-health-prevention/id6757719164">live on the App Store</a></div>
+      <dl>
+        <dt>Problem</dt>
+        <dd>An AI health-prevention startup needed its complete mobile app — architecture, design system,
+          data layer, payments, analytics, localization, and releases — delivered by a founding team of one mobile engineer.</dd>
+        <dt>Approach</dt>
+        <dd>A <b>modular workspace</b> with clean-architecture modules (domain / data / state / UI kit),
+          <b>BLoC/Cubit</b> state with freezed, <b>ObjectBox</b> offline storage, go_router navigation,
+          <b>RevenueCat subscriptions</b>, AppsFlyer attribution, the Firebase suite, a spreadsheet-driven
+          localization pipeline, and Fastlane match CI for both stores.</dd>
+        <dt>Impact</dt>
+        <dd>Live on the App Store and shipping regular releases — <b>every layer built and owned by one engineer</b>,
+          which is also the fastest way to prove a stack end-to-end.</dd>
+      </dl>
+      <div class="stackline">
+        <span class="chip">Flutter</span><span class="chip">BLoC/Cubit</span><span class="chip">ObjectBox</span>
+        <span class="chip">go_router</span><span class="chip">RevenueCat</span><span class="chip">Fastlane</span>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="tag">On-device AI</div>
+      <h3>Training the models behind Apple Intelligence</h3>
+      <div class="where">Apple (via Turing) · 2024</div>
+      <dl>
+        <dt>Problem</dt>
+        <dd>Apple Intelligence needed on-device LLMs trained and validated at scale, under Apple's privacy constraints,
+          inside a 100+ engineer cross-functional program.</dd>
+        <dt>Approach</dt>
+        <dd>Contributed to <b>training, evaluation, and optimization</b> of on-device models; built internal tools and
+          automated workflows for data processing, annotation, and model validation, working directly with Apple's
+          iOS, ML, and infrastructure teams.</dd>
+        <dt>Impact</dt>
+        <dd>Faster annotation and validation cycles for intelligent features shipping in the iOS ecosystem, with
+          privacy-preserving computation throughout.</dd>
+      </dl>
+      <div class="stackline">
+        <span class="chip">On-device LLMs</span><span class="chip">Model evaluation</span>
+        <span class="chip">Tooling &amp; automation</span><span class="chip">Privacy engineering</span>
+      </div>
+    </article>
+  </section>
+
+  <section id="apps">
+    <div class="sec-head"><b>02</b> — Apps I've shipped</div>
+    <div class="apps">
+      <div class="app">
+        <div class="kind">Events · B2B SaaS</div>
+        <h3>ExpoPlatform event apps</h3>
+        <p>150+ branded apps for international exhibitions, generated from one white-label codebase.</p>
+        <div class="link"><a href="#">App Store <span class="todo">add link</span></a></div>
+      </div>
+      <div class="app">
+        <div class="kind">FoodTech · super-app</div>
+        <h3>Express24</h3>
+        <p>Uzbekistan's leading food-delivery platform; led the iOS team through its growth phase.</p>
+        <div class="link"><a href="#">App Store <span class="todo">add link</span></a></div>
+      </div>
+      <div class="app">
+        <div class="kind">Enterprise</div>
+        <h3>EPAM client apps</h3>
+        <p>Led development and launch of apps that passed ~500K downloads within five months.</p>
+        <div class="link"><a href="#">App Store <span class="todo">add link</span></a></div>
+      </div>
+      <div class="app">
+        <div class="kind">HealthTech</div>
+        <h3>FINNET fitness</h3>
+        <p>ML-guided sports exercises with Core ML and MLKit pose detection; referral system grew users 15+%.</p>
+        <div class="link"><a href="#">App Store <span class="todo">add link</span></a></div>
+      </div>
+      <div class="app">
+        <div class="kind">HealthTech · AI · founding engineer</div>
+        <h3>ONU — AI Health &amp; Prevention</h3>
+        <p>AI health startup where I'm founding mobile engineer — built the Flutter app from scratch: modular architecture, subscriptions, AI features.</p>
+        <div class="link"><a href="https://apps.apple.com/sa/app/onu-ai-health-prevention/id6757719164">App Store ↗</a></div>
+      </div>
+      <div class="app">
+        <div class="kind">FinTech · solo</div>
+        <h3>Money Manager</h3>
+        <p>Personal-finance tracker built with Flutter; offline-first local storage.</p>
+        <div class="link"><a href="https://play.google.com/store/apps/details?id=com.brightapps.moneymanager&amp;hl=en">Google Play ↗</a></div>
+      </div>
+      <div class="app">
+        <div class="kind">Privacy · solo</div>
+        <h3>AppLock — Privacy &amp; Security</h3>
+        <p>Native Swift privacy and security app, designed, built, and shipped independently.</p>
+        <div class="link"><a href="https://apps.apple.com/ng/app/applock-privacy-security/id6754793488">App Store ↗</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="path">
+    <div class="sec-head"><b>03</b> — Path</div>
+    <div class="tl">
+      <div class="row now"><div class="when">Oct 2025 — present</div><div class="what">Senior iOS Engineer <span>· ExpoPlatform, UK</span></div></div>
+      <div class="row"><div class="when">Apr 2026 — present</div><div class="what">Founding Engineer, Mobile <span>· ONU — AI Health &amp; Prevention</span></div></div>
+      <div class="row"><div class="when">Jan 2024 — Sep 2025</div><div class="what">Senior iOS Engineer <span>· Turing, US</span></div></div>
+      <div class="row"><div class="when">Apr — Dec 2024</div><div class="what">LLM Training, Mobile Engineer <span>· Apple via Turing, US</span></div></div>
+      <div class="row"><div class="when">Aug 2022 — Dec 2023</div><div class="what">Senior iOS Engineer <span>· EPAM Systems, US</span></div></div>
+      <div class="row"><div class="when">Jan 2021 — Jul 2022</div><div class="what">Lead iOS Engineer <span>· Express24, UZ</span></div></div>
+      <div class="row"><div class="when">2019 — 2021</div><div class="what">iOS Engineer <span>· FINNET (UK), DataSite, startups</span></div></div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head"><b>04</b> — Toolbox</div>
+    <div class="skillgroups">
+      <div>
+        <h3>Core</h3>
+        <div class="chips">
+          <span class="chip">Swift</span><span class="chip">UIKit</span><span class="chip">SwiftUI</span>
+          <span class="chip">Swift Concurrency</span><span class="chip">Combine</span><span class="chip">Core Data</span>
+          <span class="chip">SQLite</span><span class="chip">WebSockets</span>
+        </div>
+      </div>
+      <div>
+        <h3>Cross-platform &amp; AI</h3>
+        <div class="chips">
+          <span class="chip">Flutter</span><span class="chip">BLoC/Cubit</span><span class="chip">ObjectBox</span>
+          <span class="chip">React Native (Expo)</span><span class="chip">TypeScript</span>
+          <span class="chip">Dart</span><span class="chip">Core ML</span><span class="chip">LLM integration</span>
+        </div>
+      </div>
+      <div>
+        <h3>Ship it</h3>
+        <div class="chips">
+          <span class="chip">XcodeGen</span><span class="chip">Tuist</span><span class="chip">SPM</span>
+          <span class="chip">Fastlane</span><span class="chip">CircleCI</span><span class="chip">Crashlytics</span>
+          <span class="chip">Sentry</span><span class="chip">Instruments</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <h2>Let's talk.</h2>
+    <p>Open to senior iOS and mobile (React Native / Flutter) roles. Fastest way to reach me is email.</p>
+    <div class="links">
+      <a class="btn primary" href="mailto:ibrohim.interview@gmail.com">ibrohim.interview@gmail.com</a>
+      <a class="btn" href="https://linkedin.com/in/ibrokhim-movlonov">LinkedIn</a>
+      <a class="btn" href="tel:+998909801525">+998 90 980 1525</a>
+    </div>
+    <p class="fine">Tashkent, Uzbekistan · works across time zones · B.Sc. ICE, Inha University</p>
+  </footer>
+
+</div>
