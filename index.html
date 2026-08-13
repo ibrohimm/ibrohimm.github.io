@@ -233,11 +233,11 @@
 
   <header class="hero">
     <div class="eyebrow">Ibrokhim Movlonov · Senior Mobile Engineer</div>
-    <h1>I build mobile apps that keep working when the network doesn't.</h1>
+    <h1>From a founding team of one to Apple's 100+ engineer AI program.</h1>
     <p class="sub">
-      7+ years across Swift, UIKit/SwiftUI, and data-layer architecture — from training on-device LLMs at Apple to owning
-      the offline-first sync engine behind 150+ white-label event apps. Cross-platform with React Native and Flutter,
-      and founding engineer of an AI health app.
+      7+ years shipping iOS and Flutter products across FoodTech, HealthTech, AI, and events. I specialize in
+      offline-first architecture — sync engines and data layers that keep 150+ white-label event apps working
+      with zero connectivity.
     </p>
     <div class="hero links">
       <a class="btn primary" href="mailto:ibrohim.interview@gmail.com">Get in touch</a>
@@ -368,6 +368,31 @@
         <span class="chip">Tooling &amp; automation</span><span class="chip">Privacy engineering</span>
       </div>
     </article>
+
+    <article class="case">
+      <div class="tag">AI tooling</div>
+      <h3>Turning Jira tickets into architecture specs</h3>
+      <div class="where">ExpoPlatform · hackathon, team of 3 · 2026</div>
+      <dl>
+        <dt>Problem</dt>
+        <dd>Cross-platform feature specs were written by hand twice — once per platform — drifting out of sync and
+          consuming senior engineers' time before a line of code was written.</dd>
+        <dt>Approach</dt>
+        <dd>An <b>agentic CI pipeline</b>: Claude Code CLI on a self-hosted runner inside Bitbucket Pipelines, connected
+          to <b>Jira and Confluence MCP servers</b>, with scoped read-only tokens for both mobile repos. A
+          <b>phase-gated agent prompt</b> (iterated v1→v3) reads the full ticket — description, comments, linked
+          designs, access rules — analyzes both codebases, and enforces strict anti-hallucination rules: never invent
+          class names or endpoints, flag gaps as "needs input from team."</dd>
+        <dt>Impact</dt>
+        <dd>One ticket ID in — a complete <b>cross-platform architecture spec published to Confluence</b>, with
+          progress reported back to the ticket. Spec-writing collapses from hours to a pipeline run, and both
+          platforms start from the same document.</dd>
+      </dl>
+      <div class="stackline">
+        <span class="chip">Claude Code</span><span class="chip">MCP</span><span class="chip">Agentic workflows</span>
+        <span class="chip">Bitbucket Pipelines</span><span class="chip">Prompt engineering</span>
+      </div>
+    </article>
   </section>
 
   <section id="apps">
@@ -446,6 +471,7 @@
           <span class="chip">Flutter</span><span class="chip">BLoC/Cubit</span><span class="chip">ObjectBox</span>
           <span class="chip">React Native (Expo)</span><span class="chip">TypeScript</span>
           <span class="chip">Dart</span><span class="chip">Core ML</span><span class="chip">LLM integration</span>
+          <span class="chip">Claude Code</span><span class="chip">MCP</span><span class="chip">Agentic workflows</span>
         </div>
       </div>
       <div>
